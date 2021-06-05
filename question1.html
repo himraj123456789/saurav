@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Untitled</title>
+    
+
+
+    
+  </head>
+  <body>
+<a href="question2.html"> question 2 page</a>
+<br>
+<br>
+ last two digit of roll number   <input type="text" id="roll">
+ <br>
+ <br>
+ <button onclick= "my_function()"> show answer</button>
+ <p>  1st answer  ( find the value of w) : <p style="background-color:pink"id="1st"></p></p>
+  <p> 2nd answer  ( find probablity of getting w appearing of a single dice) : </p><div style="background-color:red" id="2nd">    </div>
+  <p> 3rd answer  ( find probablity of gettingw as a sum of throw of two dice) : </p><div  style="background-color:green" id="3rd">    </div>
+  <p> 4th answer  (  find probablity of getting  x appearing as a sum of two dice) : </p><div style="background-color:blue" id="4th">    </div>
+  <p> 5th answer  ( diffrence between x and w ) :</p><div style="background-color:orange" id="5th">    </div>
+  <p> 6th answer   ( best probablity) :</p><div style="background-color:gray" id="6th">    </div>
+  <script>
+  var arr=[];
+  function my_function()
+  {
+  var w;
+  
+	var x= parseInt(document.getElementById("roll").value);
+	
+	var num1=parseInt(x%10);
+	var x= x/10;
+	var num2=parseInt(x);
+	var num=num1+num2;
+	console.log(num);
+	if(num<=6)
+	{
+		console.log("number is less then 6");
+		var w=num;
+		
+		}
+		else
+		{
+			console.log("number is greater then 6");
+			var w=num-5;
+			if(w<=6)
+			{
+				console.log("ok 1 round");
+			}
+			else{
+				var w=w-5;
+				console.log("ok go for second round")
+				console.log(w);
+				}
+				}
+		document.getElementById("1st").innerHTML=w;	
+		second_answer(w);
+		third_answer(w);
+		fourth_answer(num);
+		fifth_answer(num,w);
+		sixth_answer();
+		
+	}
+	function second_answer(w)
+	{
+	var res;
+	var x=1;
+	 if(w<=6)
+	 {
+		res=1/6;
+		}
+		else
+		{
+		x=0;
+			res=0;
+			}
+		
+	 arr.push(res);
+	var str1=(x)+"/"+"6" +"    "+ " or "+"   "+res ;
+		document.getElementById("2nd").innerHTML=str1;
+		}
+		function third_answer(w)
+		{
+		var counter=0;
+			for(var i=1;i<=6;i++)
+			{
+				for(var j=1;j<=6;j++)
+				{
+					var sum1=i+j;
+					if(sum1==w)
+					{
+						counter++;
+						}
+						}
+						}
+						var res=counter/36;
+						arr.push(res);
+						var str1=(counter)+"/"+"36" +"    "+ " or "+"   "+res ;
+						document.getElementById("3rd").innerHTML=str1;
+						}
+		function fourth_answer(x)
+		{
+		var counter=0;
+			for(var i=1;i<=6;i++)
+			{
+				for(var j=1;j<=6;j++)
+				{
+					var sum1=i+j;
+					if(sum1==x)
+					{
+						counter++;
+						}
+						}
+						}
+						var res=counter/36;
+						arr.push(res);
+						var str1=(counter)+"/"+"36" +"    "+ " or "+"   "+res ;
+						document.getElementById("4th").innerHTML=str1;
+			
+			}
+		function fifth_answer(x,w)
+		{
+			var diff=x-w;
+			if(diff<=-1)
+			{
+				diff=0;
+				}
+			
+			var counter=0;
+			for(var i=1;i<=6;i++)
+			{
+				for(var j=1;j<=6;j++)
+				{
+					var sum1=i+j;
+					if(sum1==diff)
+					{
+						counter++;
+						}
+						}
+						}
+						var res=counter/36;
+						arr.push(res)
+						var str1=(counter)+"/"+"36" +"    "+ " or "+"   "+res ;
+						document.getElementById("5th").innerHTML=str1;
+			
+			}
+		function sixth_answer()
+		{
+			var res=Math.max(...arr);
+			
+			document.getElementById("6th").innerHTML=res;
+			}
+						
+		
+			
+</script>
+  </body>
+</html>

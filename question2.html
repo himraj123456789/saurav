@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Untitled</title>
+    
+
+
+    
+  </head>
+  <body>
+<a href="question1.html"> question 1 page </a>
+<br>
+<br>
+ roll number   <input type="text" id="roll">
+ <br>
+ <br>
+ <button onclick= "my_function()"> click me</button>
+ <p> mean of series 1 : </p><div style="background-color:red" id="s1mean">    </div>
+  <p> mean of series 2 : </p><div style="background-color:green"id="s2mean">    </div>
+  <p> convariance : </p><div  style="background-color:pink"id="conv">    </div>
+   <p> correlation : </p><div style="background-color:orange" id="corr">    </div>
+   <p> standard deviation of series 1 : </p><div style="background-color:blue" id="dev">    </div>
+  <script>
+  
+  function my_function()
+  
+  {
+  var roll=document.getElementById("roll").value;
+  var roll=parseInt(roll)+10;
+  var newroll=roll;
+  var s1=[];// for series1
+  var s2=[];  // for series 2
+  for(var i=0;i<=9;i++)
+  {
+	s1.push(roll);
+	roll=roll+1;
+	}
+	for (var j=0;j<=9;j++)
+	{
+		s2.push(newroll);
+		newroll=newroll-1;
+		}
+	console.log(s1);
+	console.log(s2);
+	var xbar=0;
+	var ybar=0;
+	for (var i=0;i<s1.length;i++)
+	{
+		xbar=xbar+s1[i]
+		ybar=ybar+s2[i];
+		
+		}
+		xbar=xbar/10;
+		ybar=ybar/10;
+		document.getElementById("s1mean").innerHTML=xbar;
+		document.getElementById("s2mean").innerHTML=ybar;
+		var x1xbar=[];
+		var y1ybar=[];
+		var sqx1xbar=[];
+		var sqy1ybar=[];
+		var xiyi=[];
+		var sumx1xbar=0;
+		var sumy1ybar=0;
+		var sqsumx1xbar=0;
+		var sqsumy1ybar=0;
+		var sumxiyi=0;
+		for (var i=0;i<s1.length;i++)
+		{
+			var diff=s1[i]-xbar;
+			x1xbar.push(diff);
+			sumx1xbar=sumx1xbar+diff;
+			sqsumx1xbar=sqsumx1xbar+diff*diff;
+			sqx1xbar.push(diff*diff);
+			}
+			for(var i=0;i<s2.length;i++)
+			{
+				var diff=s2[i]-ybar;
+				y1ybar.push(diff);
+				sumy1ybar=sumy1ybar+diff;
+				sqsumy1ybar=sqsumy1ybar+diff*diff;
+				sqy1ybar.push(diff*diff);
+				}
+				console.log(x1xbar);
+				console.log(y1ybar);
+				console.log(sqx1xbar);
+				console.log(sqy1ybar);
+			for (var i=0;i<s1.length;i++)
+			{	
+				var n1=x1xbar[i]
+				var n2=y1ybar[i]
+			
+				xiyi.push(n1*n2);
+				}
+				for (var i=0;i<s1.length;i++)
+				{
+					sumxiyi=sumxiyi+xiyi[i];
+					}
+				console.log(xiyi);
+				console.log(sumx1xbar);
+				console.log(sumy1ybar);
+				console.log(sqsumx1xbar);
+				console.log(sqsumy1ybar);
+				console.log(sumxiyi);
+				var answer_for_cov=sumxiyi/10;
+				var answer_for_cov1=sumxiyi/9;
+				var show=answer_for_cov +"  "+" or "+ "  "+answer_for_cov1;
+				document.getElementById("conv").innerHTML=show;
+				var cor=Math.sqrt(sqsumx1xbar)*Math.sqrt(sqsumy1ybar)
+				var cor=sumxiyi/cor;
+				document.getElementById("corr").innerHTML=cor;
+				var result=sqsumx1xbar/9;
+				document.getElementById("dev").innerHTML=result;
+				}
+ 
+</script>
+  </body>
+</html>
